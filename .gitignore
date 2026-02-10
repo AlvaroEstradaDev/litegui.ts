@@ -1,0 +1,53 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+
+# Generated documentation
+docs/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Test coverage
+coverage/
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+
+# Cache files
+.cache/
+.eslintcache
+*.tsbuildinfo
+
+# TypeScript incremental build cache
+tsconfig.tsbuildinfo
+
+# webpack stats
+stats.json
+
+# npm package exports (if using)
+!dist/.gitkeep

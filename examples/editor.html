@@ -1,0 +1,300 @@
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+	<title>LiteGUI Demo</title>
+	<style type='text/css'></style>
+	<link rel="stylesheet" type="text/css" href="../dist/litegui.css">
+	<link rel="stylesheet" href="../dist/Pickr/themes/nano.min.css" />
+	<script type="text/javascript" src="../dist/litegui.js"></script>
+</head>
+
+<body>
+	<script type="text/javascript">
+		//call the init to setup 
+		LiteGUI.init();
+
+		// Create menubar
+		var menubar = new LiteGUI.Menubar("menubar");
+		menubar.add("File/New", { callback: function () { console.log("File New clicked"); } });
+		menubar.add("File/Open", { callback: function () { console.log("File Open clicked"); } });
+		menubar.separator("File");
+		menubar.add("File/Preferences", { callback: function () { console.log("File Preferences clicked"); } });
+		menubar.add("Edit/Undo", { callback: function () { console.log("Edit Undo clicked"); } });
+		menubar.add("Edit/Redo", { callback: function () { console.log("Edit Redo clicked"); } });
+		menubar.add("View/Controls", { autoOpen: true, callback: function (v) { console.log("View Controls clicked"); } });
+		menubar.add("View/Controls/Panel", { checkbox: true, callback: function (v) { console.log("View Panel toggled: " + (v.checkbox ? "true" : "false")); } });
+
+		LiteGUI.add(menubar);
+
+		//create a main container and split it in two
+		var mainarea = new LiteGUI.Area("mainarea", { contentId: "canvasarea", autoresize: true, immediateResize: true });
+		mainarea.split("horizontal", [200, null], true);
+		LiteGUI.add(mainarea);
+
+		//create a left panel
+		var sidePanel = new LiteGUI.Panel("sidepanel", { title: "Inspector", scrollable: true });
+		mainarea.getSection(0).add(sidePanel);
+
+		//create a inspector (widget container)
+		var widgets = new LiteGUI.Inspector();
+
+		// Dialogs Section
+		widgets.beginGroup("Dialogs", { scrollable: true });
+		widgets.addButton("Alert", "Show", function () { LiteGUI.alert("foo"); });
+		widgets.addButton("Prompt", "Show", function () { LiteGUI.prompt("What are you?", function (v) { if (v) LiteGUI.alert(v); }); });
+		widgets.addButton("Confirm", "Show", function () { LiteGUI.confirm("Are you sure?"); });
+		widgets.addButton("Dialog", "Show", function ()
+		{
+			var dialog = new LiteGUI.Dialog({ id: "simple-dialog", title: "My dialog", content: "<p>Boring content</p>", close: true, resizable: true, draggable: true });
+			dialog.show();
+			dialog.center();
+		});
+		widgets.addButton("Table Dialog", "Show", function ()
+		{
+			var dialog = new LiteGUI.Dialog({ id: "table-dialog", title: "Table Dialog", close: true, resizable: true, draggable: true, width: 400, height: 300 });
+
+			var table = new LiteGUI.Table({ scrollable: true, height: "100%" });
+			table.setColumns(["Name", "Age", "Role"]);
+			table.setRows([
+				{ name: "John", age: 30, role: "Developer" },
+				{ name: "Jane", age: 25, role: "Designer" },
+				{ name: "Bob", age: 40, role: "Manager" },
+				{ name: "Alice", age: 35, role: "Tester" }
+			]);
+
+			dialog.add(table);
+			dialog.show();
+			dialog.center();
+		});
+		widgets.endGroup();
+		widgets.addSeparator();
+
+		// Text Input Widgets
+		widgets.beginGroup("Text Inputs");
+		widgets.addString("String", "Hello World", { callback: function (v) { console.log("String changed:", v); } });
+		widgets.addStringButton("String Button", "Click me", { button: "Action", buttonWidth: "auto", callback: function (v) { console.log("String button:", v); } });
+		widgets.addStringButton("String Button Icon", "Icon test", { button: "Icon", icon: "https://www.w3.org/html/logo/downloads/HTML5_Badge_32.png", onClick: function (v, e) { console.log("String button icon:", v, e); }, callback: function (v) { console.log("String button icon:", v); } });
+		widgets.addTextArea("Text Area", "Multi-line\ntext here", { callback: function (v) { console.log("TextArea changed:", v); } });
+		widgets.addInfo("Info", "This is read-only info text");
+		widgets.endGroup();
+		widgets.addSeparator();
+
+		// Number Widgets
+		widgets.beginGroup("Number Inputs");
+		widgets.addNumber("Number", 42, { min: 0, max: 100, step: 1, callback: function (v) { console.log("Number changed:", v); } });
+		widgets.addSlider("Slider", 0.5, { min: 0, max: 1, step: 0.01, callback: function (v) { console.log("Slider changed:", v); } });
+		widgets.endGroup();
+		widgets.addSeparator();
+
+		// Vector Widgets
+		widgets.beginGroup("Vector Inputs");
+		widgets.addVector2("Vector2", [1, 2], { callback: function (v) { console.log("Vector2 changed:", v); } });
+		widgets.addVector3("Vector3", [1, 2, 3], { callback: function (v) { console.log("Vector3 changed:", v); } });
+		widgets.addVector4("Vector4", [1, 2, 3, 4], { callback: function (v) { console.log("Vector4 changed:", v); } });
+		widgets.addPad("Pad", [0.5, 0.5], { callback: function (v) { console.log("Pad changed:", v); } });
+		widgets.endGroup();
+		widgets.addSeparator();
+
+		// Boolean Widgets
+		widgets.beginGroup("Boolean Inputs");
+		widgets.addCheckbox("Checkbox", true, { callback: function (v) { console.log("Checkbox changed:", v); } });
+		widgets.addCheckbox("Checkbox Custom", false, { labelOn: "Enabled", labelOff: "Disabled", callback: function (v) { console.log("Checkbox Custom changed:", v); } });
+		widgets.addFlags({ "Flag A": true, "Flag B": false, "Flag C": true }, { callback: function (v) { console.log("Flags changed:", v); } });
+		widgets.endGroup();
+		widgets.addSeparator();
+
+		// Selection Widgets
+		widgets.beginGroup("Selection Inputs");
+		widgets.addCombo("Combo", "Option 2", { values: ["Option 1", "Option 2", "Option 3"], callback: function (v) { console.log("Combo changed:", v); } });
+		widgets.addComboButtons("Combo Buttons", "Button B", { values: ["Button A", "Button B", "Button C"], callback: function (v) { console.log("Combo button changed:", v); } });
+		widgets.addList("List", ["Item 1", "Item 2", "Item 3"], { callback: function (v) { console.log("List changed:", v); } });
+		widgets.addTags("Tags", ["tag1", "tag2", "tag3"], { callback: function (v) { console.log("Tags changed:", v); } });
+		widgets.endGroup();
+		widgets.addSeparator();
+
+		// Button Widgets
+		widgets.beginGroup("Buttons");
+		widgets.addButton(null, "Single Button", function () { console.log("Button clicked"); });
+		widgets.addButtons(null, ["Button 1", "Button 2", "Button 3"], { callback: function (v) { console.log("Button clicked:", v); } });
+		widgets.addIcon("Icon Button", false, { imageURL: "https://www.w3.org/html/logo/downloads/HTML5_Badge_32.png", callback: function () { console.log("Icon clicked"); } });
+		widgets.endGroup();
+		widgets.addSeparator();
+
+		// Color Widgets
+		widgets.beginGroup("Color Inputs");
+		widgets.addColor("Color", [255, 0, 0], { callback: function (v) { console.log("Color changed:", v); } });
+		widgets.addColor("Color Position", [0, 255, 0], { callback: function (v) { console.log("Color changed:", v); } });
+		widgets.endGroup();
+		widgets.addSeparator();
+
+		// File Widget
+		widgets.beginGroup("File Input");
+		widgets.addFile("File", null, { callback: function (file) { console.log("File selected:", file ? file.name : "none"); } });
+		widgets.endGroup();
+		widgets.addSeparator();
+
+		// ContextMenu Widget
+		widgets.beginGroup("Context Menu");
+		widgets.addInfo("Right-click anywhere in the main panel area to show a context menu.");
+		widgets.addButton("Show ContextMenu", "Click to Open", function () {
+			new LiteGUI.ContextMenu(
+				["Copy", "Paste", null, "Delete", { title: "More Options", submenu: { options: ["Option A", "Option B", "Option C"] } }],
+				{
+					event: { clientX: 400, clientY: 300 },
+					callback: function (v) { console.log("ContextMenu option selected:", v); }
+				}
+			);
+		});
+		widgets.endGroup();
+		widgets.addSeparator();
+
+		// Advanced Widgets
+		widgets.beginGroup("Advanced Widgets");
+		widgets.addLineEditor("Line Editor", [[0, 0], [0.5, 0.5], [1, 1]], { callback: function (v) { console.log("Line changed:", v); } });
+		widgets.addTree("Tree", {
+			id: "root",
+			children: [
+				{ id: "child1", children: [] },
+				{ id: "child2", children: [{ id: "grandchild1", children: [] }] }
+			]
+		}, { callback: function (node) { console.log("Tree node selected:", node); }, treeOptions: { allowDrag: true } });
+		widgets.addDataTree("Data Tree", {
+			name: "Root",
+			value: 100,
+			nested: {
+				child1: "value1",
+				child2: 42
+			}
+		}, { callback: function (v) { console.log("DataTree changed:", v); } });
+		widgets.addArray("Array", [[10, 20], [30, 40]], { dataType: "vector2", showLength: true, callback: function (v) { console.log("Array changed:", JSON.stringify(v)); } });
+		widgets.endGroup();
+		widgets.addSeparator();
+
+
+		// Container Widgets
+		widgets.addTitle("Containers");
+		var section = widgets.addSection("Collapsible Section", { collapsed: false });
+		widgets.addString("Nested String", "Inside section", { callback: function (v) { console.log("Nested string:", v); } });
+		widgets.addNumber("Nested Number", 10, { callback: function (v) { console.log("Nested number:", v); } });
+		widgets.endCurrentSection();
+
+		widgets.addSeparator();
+
+		sidePanel.add(widgets);
+
+		//create right panel
+		var mainPanel = new LiteGUI.Panel("mainpanel");
+		//create a sub area for the right side
+		var rightArea = new LiteGUI.Area("right_area", { contentId: "right_area", autoresize: true, immediateResize: true });
+		mainarea.getSection(1).add(rightArea);
+		rightArea.split("vertical", [null, 200], true);
+
+		//create right panel
+		var mainPanel = new LiteGUI.Panel("mainpanel");
+		rightArea.getSection(0).add(mainPanel);
+
+		// Add context menu to main panel on right-click
+		mainPanel.root.addEventListener("contextmenu", function (e) {
+			if (e.button !== 2) return;
+			e.preventDefault();
+			new LiteGUI.ContextMenu(
+				[
+					{ title: "Copy", callback: function () { console.log("Copy clicked"); } },
+					{ title: "Paste", callback: function () { console.log("Paste clicked"); } },
+					null,
+					{
+						title: "Edit",
+						submenu: {
+							options: ["Undo", "Redo"],
+							callback: function (v) { console.log("Edit option:", v); }
+						}
+					},
+					{ title: "Delete", disabled: true }
+				],
+				{
+					event: e,
+					callback: function (v) { console.log("ContextMenu selected:", v); }
+				}
+			);
+			return false;
+		});
+
+		//create console panel
+		var consolePanel = new LiteGUI.Panel("consolepanel", { title: "Console", hideHeader: true });
+		rightArea.getSection(1).add(consolePanel);
+
+		var consoleWidget = new LiteGUI.Console();
+		consolePanel.add(consoleWidget);
+
+		// Global callback tracking
+		window.tabCallbacks = {
+			tab01: false,
+			tab02: false,
+			buttonTab: false,
+			plusTab: false
+		};
+
+		//create some tabs
+		var tabs = new LiteGUI.Tabs({
+			id: "tabs",
+			size: "full",
+			allowRename: true,
+			callback: function (tabID, event)
+			{
+				console.log("Main callback triggered: " + tabID);
+				if (window.tabCallbacks && window.tabCallbacks[tabID] !== undefined)
+				{
+					window.tabCallbacks[tabID] = true;
+				}
+			}
+		});
+
+		// Expose for usage in tests
+		window.testTabs = tabs;
+
+		var codeTab = tabs.addTab("Code", { size: "full" });
+		codeTab.content.innerHTML = "<h2>Code of this example</h2><pre></pre>";
+
+		tabs.addTab("Image", { content: "<img src='https://www.w3.org/html/logo/downloads/HTML5_Badge_512.png'/>" });
+
+		// --- Integrated Test Tabs ---
+		tabs.addTab("tab01", {
+			title: "Tab 01",
+			callback: function (tabId, event)
+			{
+				console.log("Tab 01 callback triggered: " + tabId);
+				window.tabCallbacks.tab01 = true;
+			}
+		});
+
+		tabs.addTab("tab02", {
+			title: "Tab 02",
+			callback: function (tabId, event)
+			{
+				console.log("Tab 02 callback triggered: " + tabId);
+				window.tabCallbacks.tab02 = true;
+			}
+		});
+
+		tabs.addButtonTab("buttonTab", "Button Tab", function (tabId, event)
+		{
+			console.log("Button Tab callback triggered: " + tabId);
+			window.tabCallbacks.buttonTab = true;
+		});
+
+		tabs.addPlusTab(function (tabId, event)
+		{
+			console.log("Plus Tab callback triggered: " + tabId);
+			window.tabCallbacks.plusTab = true;
+		});
+
+		widgets.addButton(null, "Detach Code tab", function () { tabs.detachTab("Code"); });
+
+		mainPanel.add(tabs);
+
+	</script>
+
+
+</body>
+
+</html>

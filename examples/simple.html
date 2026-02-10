@@ -1,0 +1,56 @@
+<title>LiteGUI Demo</title>
+<style>
+body { background-color: #DDD; }
+    h1 {
+        margin: 0;
+    }
+    
+    #wrap {
+        margin: auto;
+        width: 800px;
+        min-height: 400px;
+        padding: 1em;
+        background-color: white;
+        box-shadow: 0 0 2px #333;
+    }
+</style>
+<link rel="stylesheet" type="text/css" href="../dist/litegui.css">
+
+<script type="text/javascript" src="../dist/litegui.js"></script>
+
+<style>
+	html,
+	body {
+		width: 100%;
+		height: 100%;
+	}
+
+	#sidebar {
+		font-size: 2em;
+		width: 300px;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		right: 0;
+	}
+</style>
+
+</head>
+
+<body>
+	<div id="sidebar"></div>
+
+	<script type="text/javascript">
+		//call the init to setup
+		LiteGUI.init();
+		var sidebar = new LiteGUI.Inspector();
+		sidebar.addString("Name", "now");
+		sidebar.addButton(null, "Send", function ()
+		{
+			LiteGUI.alert("foo");
+		});
+		sidebar.appendTo("#sidebar");
+	</script>
+</body>
+
+</html>
