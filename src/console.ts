@@ -186,8 +186,6 @@ export class Console implements LiteGUIObject
 	// TODO: Implement autocomplete
 	onAutocomplete(value: string)
 	{
-		// This wasn't declared, just used so...
-
 		// The function is supposed to return something so I will return the same parameter
 		return value;
 	}
@@ -195,7 +193,11 @@ export class Console implements LiteGUIObject
 	// TODO: Implement command processing
 	onProcessCommand(cmd: string): void
 	{
-		// This wasn't declared, just used so...
-		console.log(cmd);
+		// Have to do this to avoid "TS6133: 'cmd' is declared but its value is never read."
+		const test = `${cmd}`;
+		if (test === "clear")
+		{
+			return;
+		}
 	}
 }
