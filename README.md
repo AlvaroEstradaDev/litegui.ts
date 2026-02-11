@@ -11,6 +11,23 @@ you're looking for. On the other hand, any advanced UI will need a lot of coding
 
 ![Example](imgs/litegui.PNG "LiteGUI Example")
 
+Installation
+-----------
+
+### npm
+
+```bash
+npm install litegui.ts
+```
+
+### CDN (GitHub Pages)
+
+You can also load the library directly from the GitHub Pages CDN — no install required:
+```html
+<link type="text/css" rel="stylesheet" href="https://alvaroestradadev.github.io/litegui.ts/litegui.css">
+<script type="application/javascript" src="https://alvaroestradadev.github.io/litegui.ts/litegui.js"></script>
+```
+
 Creating a UI
 -----------
 
