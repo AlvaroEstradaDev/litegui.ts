@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.3] - 2026-02-11
+
+### 📚 Documentation
+
+- *(Readme)* Readme update
+- Added installation instructions
+
+### 🏗️ Miscellaneous
+
+- *(Actions)* Release update
+- Shorten the release notes
+
 ## [1.0.2] - 2026-02-11
 
 ### 🏗️ Miscellaneous

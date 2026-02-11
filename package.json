@@ -1,6 +1,6 @@
 {
   "name": "litegui.ts",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A TypeScript library to create webapps with a desktop look-alike user interface",
   "main": "dist/litegui.js",
   "types": "dist/litegui.d.ts",
