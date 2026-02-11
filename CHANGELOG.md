@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### 🏗️ Miscellaneous
 
 - *(Webpack)* Changed source types
+- *(Core)* Changed the way the singleton exports
 
 ## [1.0.6] - 2026-02-11
 
