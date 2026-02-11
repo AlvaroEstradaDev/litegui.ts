@@ -660,4 +660,11 @@ Object.defineProperty(String.prototype, "template", {
 	enumerable: false
 });
 
-export const LiteGUI = new Core();
+const CoreInstance = new Core();
+
+if (typeof window !== "undefined")
+{
+	window.LiteGUI = CoreInstance;
+}
+
+export { CoreInstance as LiteGUI };
