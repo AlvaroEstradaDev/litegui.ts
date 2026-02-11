@@ -1,6 +1,6 @@
 {
   "name": "litegui.ts",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A TypeScript library to create webapps with a desktop look-alike user interface",
   "main": "dist/litegui.js",
   "types": "dist/litegui.d.ts",
@@ -28,13 +28,13 @@
     "dist/*",
     "dist/**/*"
   ],
-  	"exports": {
-		".": {
-			"types": "./dist/litegui.d.ts",
-			"default": "./dist/litegui.js"
-		},
-		"./src": "./src/"
-	},
+  "exports": {
+    ".": {
+      "types": "./dist/litegui.d.ts",
+      "default": "./dist/litegui.js"
+    },
+    "./src": "./src/"
+  },
   "scripts": {
     "build": "webpack --config webpack.build.config.ts",
     "dev": "webpack serve --config webpack.dev.config.ts",

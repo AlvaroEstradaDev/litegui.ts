@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.5] - 2026-02-11
+
+### 🐛 Bug Fixes
+
+- Remove unnecessary LiteGUI references
+
+### 🏗️ Miscellaneous
+
+- *(Webpack)* Changed exports declaration
+
 ## [1.0.4] - 2026-02-11
 
 ### 🏗️ Miscellaneous
