@@ -33,7 +33,7 @@ jobs:
       - name: Generate Changelog
         uses: smichard/conventional_changelog@2.0.0
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.HUB_TOKEN }}
 
       - name: Commit version and changelog
         run: |
