@@ -9,7 +9,7 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import { Compiler } from "webpack";
 
 // Set entry point
-webpackCommon.entry.litegui = [path.resolve(__dirname, './src/core.ts')];
+webpackCommon.entry.litegui = [path.resolve(__dirname, './src/index.ts')];
 
 // Common setup
 const copyPlugin = new CopyPlugin({
@@ -18,15 +18,15 @@ const copyPlugin = new CopyPlugin({
 	]
 });
 
-// Custom plugin to copy core.d.ts to litegui.d.ts and fix sourcemap reference
+// Custom plugin to copy index.d.ts to litegui.d.ts and fix sourcemap reference
 const CopyDtsPluginSafe = {
 	apply: (compiler: Compiler) =>
 	{
 		compiler.hooks.done.tap('CopyTypesPlugin', () =>
 		{
 			const buildPath = path.resolve(__dirname, "./dist");
-			const srcTypes = path.join(buildPath, "core.d.ts");
-			const srcMap = path.join(buildPath, "core.d.ts.map");
+			const srcTypes = path.join(buildPath, "index.d.ts");
+			const srcMap = path.join(buildPath, "index.d.ts.map");
 			const destTypes = path.join(buildPath, "litegui.d.ts");
 			const destMap = path.join(buildPath, "litegui.d.ts.map");
 
@@ -36,7 +36,7 @@ const CopyDtsPluginSafe = {
 				{
 					let content = fs.readFileSync(srcTypes, 'utf8');
 
-					const sourceMapComment = "//# sourceMappingURL=core.d.ts.map";
+					const sourceMapComment = "//# sourceMappingURL=index.d.ts.map";
 					if (content.includes(sourceMapComment))
 					{
 						/*
@@ -52,14 +52,14 @@ const CopyDtsPluginSafe = {
 					}
 
 					fs.writeFileSync(destTypes, content);
-					console.log("Copied and updated core.d.ts to litegui.d.ts");
+					console.log("Copied and updated index.d.ts to litegui.d.ts");
 				}
 				if (fs.existsSync(srcMap))
 				{
 					let mapContent = fs.readFileSync(srcMap, 'utf8');
-					mapContent = mapContent.replace(/"file":"core.d.ts"/, '"file":"litegui.d.ts"');
+					mapContent = mapContent.replace(/"file":"index.d.ts"/, '"file":"litegui.d.ts"');
 					fs.writeFileSync(destMap, mapContent);
-					console.log("Copied and updated core.d.ts.map to litegui.d.ts.map");
+					console.log("Copied and updated index.d.ts.map to litegui.d.ts.map");
 				}
 			}
 			catch (e)
