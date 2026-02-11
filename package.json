@@ -28,10 +28,13 @@
     "dist/*",
     "dist/**/*"
   ],
-  "exports": {
-    ".": "./dist/litegui.js",
-    "./src": "./src/"
-  },
+  	"exports": {
+		".": {
+			"types": "./dist/litegui.d.ts",
+			"default": "./dist/litegui.js"
+		},
+		"./src": "./src/"
+	},
   "scripts": {
     "build": "webpack --config webpack.build.config.ts",
     "dev": "webpack serve --config webpack.dev.config.ts",
