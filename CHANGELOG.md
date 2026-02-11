@@ -2,45 +2,24 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html) and to [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/).
 
-## [1.0.0] - 2026-02-10
+## Unreleased changes
 
-### Added
+## 1.0.1 (2026-02-10)
 
-- Initial release of LiteGUI.ts
-- TypeScript port of the original litegui.js library
-- Core UI components:
-  - Dialog windows
-  - Inspector panels
-  - Menus and menu bars
-  - Widgets (Button, Checkbox, Slider, etc.)
-  - Tables and trees
-  - Draggable elements
-  - Tabs and panels
-  - Text editors and inputs
-- Full TypeScript type definitions
-- Comprehensive test suite with Jest
-- Build system with webpack
-- Source maps for debugging
-- Minified production builds
-- Documentation generated with TypeDoc
-- Support for custom themes via CSS
+### Bug Fixes
+- remove console log [`c4d9af2`](https://github.com/AlvaroEstradaDev/litegui.ts/commit/c4d9af2)
 
-### Changed
+### Build
+- fix tag fetch [`9e1be94`](https://github.com/AlvaroEstradaDev/litegui.ts/commit/9e1be94)
+- correct pull [`79c1db7`](https://github.com/AlvaroEstradaDev/litegui.ts/commit/79c1db7)
+- correct secret [`aa2398f`](https://github.com/AlvaroEstradaDev/litegui.ts/commit/aa2398f)
+- improve actions [`b3a5322`](https://github.com/AlvaroEstradaDev/litegui.ts/commit/b3a5322)
+- improve actions [`8d4c1eb`](https://github.com/AlvaroEstradaDev/litegui.ts/commit/8d4c1eb)
 
-- Breaking changes from original litegui.js for better TypeScript integration
-- Modular architecture for improved maintainability
+## 1.0.0 (2026-02-10)
 
-### Removed
+### Feature
+- initial release [`ec98d2f`](https://github.com/AlvaroEstradaDev/litegui.ts/commit/ec98d2f)
 
-- Legacy jQuery dependencies (not applicable to TypeScript version)
-
-### Known Issues
-
-- See [GitHub Issues](https://github.com/AlvaroEstradaDev/litegui.ts/issues) for current known issues
-
-## [0.0.0] - Development Started
-
-- Project initialization
-- Initial TypeScript conversion
