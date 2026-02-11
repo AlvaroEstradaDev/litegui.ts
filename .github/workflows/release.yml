@@ -28,6 +28,9 @@ jobs:
           echo "Setting package version to $TAG_VERSION"
           npm version "$TAG_VERSION" --no-git-tag-version
 
+      - name: Remove local tag to avoid fetch conflict
+        run: git tag -d "$GITHUB_REF_NAME" || true
+
       - name: Generate Changelog
         uses: smichard/conventional_changelog@2.0.0
         with:
