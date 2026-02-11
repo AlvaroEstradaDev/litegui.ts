@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.7] - 2026-02-11
+
+### 🏗️ Miscellaneous
+
+- *(Webpack)* Changed source types
+
 ## [1.0.6] - 2026-02-11
 
 ### 🐛 Bug Fixes
