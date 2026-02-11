@@ -1,5 +1,5 @@
+import { Trigger } from "../utilities";
 import { CreateWidgetOptions, InspectorActiveWidget, InspectorValue, WidgetChangeOptions } from "../@types/Inspector";
-import { LiteGUI } from "../core";
 import { Inspector } from "./inspector";
 
 /**
@@ -72,7 +72,7 @@ export function AddCheckbox(that: Inspector, name: string, value: boolean, optio
 	const checkbox = element.querySelector(".wcontent .checkbox") as HTMLElement;
 	checkbox.addEventListener("keypress", (e: KeyboardEvent) =>
 	{
-		if (e.code === "Space" || e.key === " ") { LiteGUI.trigger(checkbox, "click"); }
+		if (e.code === "Space" || e.key === " ") { Trigger(checkbox, "click"); }
 	});
 
 	// Toggle value on click
@@ -105,7 +105,7 @@ export function AddCheckbox(that: Inspector, name: string, value: boolean, optio
 			that.values.set(valueName, v);
 			if (!skipEvent)
 			{
-				LiteGUI.trigger(checkbox, "click");
+				Trigger(checkbox, "click");
 			}
 		}
 	};

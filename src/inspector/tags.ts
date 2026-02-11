@@ -1,3 +1,4 @@
+import { Trigger } from "../utilities";
 import { CreateWidgetOptions, InspectorWidget, WidgetChangeOptions } from "../@types/Inspector";
 import { LiteGUI } from "../core";
 import { Inspector } from "./inspector";
@@ -166,7 +167,7 @@ export function AddTags(that: Inspector, name?: string, values?: string[], optio
 			LiteGUI.remove(tag);
 
 			// Notify removal and changes
-			LiteGUI.trigger(element, "wremoved", tagname);
+			Trigger(element, "wremoved", tagname);
 			triggerChange();
 		});
 
@@ -175,7 +176,7 @@ export function AddTags(that: Inspector, name?: string, values?: string[], optio
 
 		// Notify addition and changes
 		triggerChange();
-		LiteGUI.trigger(element, "wadded", tagname);
+		Trigger(element, "wadded", tagname);
 	}
 
 	/**
@@ -185,7 +186,7 @@ export function AddTags(that: Inspector, name?: string, values?: string[], optio
 	{
 		that.values.set(valueName, element.tags);
 		if (options!.callback) { options!.callback.call(element, element.tags); }
-		LiteGUI.trigger(element, "wchange", element.tags);
+		Trigger(element, "wchange", element.tags);
 		if (that.onChange) { that.onChange(valueName, element.tags, element); }
 	}
 

@@ -1,5 +1,5 @@
 import { LiteGUIObject } from "./@types/globals";
-import { LiteGUI } from "./core";
+import { Trigger } from "./utilities";
 
 /**
  * Configuration options for the Dragger widget.
@@ -218,7 +218,7 @@ export class Dragger implements LiteGUIObject
 				dragger.data = [e.screenX, e.screenY];
 
 				this.dragging = true;
-				LiteGUI.trigger(element, "start_dragging");
+				Trigger(element, "start_dragging");
 			}
 
 			e.stopPropagation();
@@ -257,13 +257,13 @@ export class Dragger implements LiteGUIObject
 		const _onMouseUp = (e: MouseEvent) =>
 		{
 			this.dragging = false;
-			LiteGUI.trigger(element, "stop_dragging");
+			Trigger(element, "stop_dragging");
 			const doc = docBound || document;
 			docBound = null;
 			doc.removeEventListener("mousemove", _onMouseMove);
 			doc.removeEventListener("mouseup", _onMouseUp);
 			if (doc.exitPointerLock) { doc.exitPointerLock(); }
-			LiteGUI.trigger(dragger, "blur");
+			Trigger(dragger, "blur");
 			e.stopPropagation();
 			e.preventDefault();
 			return false;
@@ -297,7 +297,7 @@ export class Dragger implements LiteGUIObject
 
 			input.value = result.toFixed(precision);
 			if (options!.units) { input.value += options!.units; }
-			LiteGUI.trigger(input, "change");
+			Trigger(input, "change");
 		}
 	}
 
@@ -332,7 +332,7 @@ export class Dragger implements LiteGUIObject
 
 		if (this.options.units) { stringValue += this.options.units; }
 		this.input.value = stringValue;
-		if (!skipEvent) { LiteGUI.trigger(this.input, "change"); }
+		if (!skipEvent) { Trigger(this.input, "change"); }
 	}
 
 	/**

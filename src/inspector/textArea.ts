@@ -1,5 +1,5 @@
+import { FocusElement, SizeToCSS, Trigger } from "../utilities";
 import { CreateWidgetOptions, InspectorValue, WidgetChangeOptions } from "../@types/Inspector";
-import { LiteGUI } from "../core";
 import { Inspector } from "./inspector";
 import { InspectorStringWidget } from "./string";
 
@@ -69,22 +69,22 @@ export function AddTextArea(that: Inspector, name?: string, value?: string, opti
 
 	if (opt.height)
 	{
-		textarea.style.height = "calc( " + LiteGUI.sizeToCSS(opt.height) + " - 5px )";
+		textarea.style.height = `calc( ${SizeToCSS(opt.height)} - 5px )`;
 	}
-	// Textarea.style.height = LiteGUI.sizeToCSS( opt.height );
+	// Textarea.style.height = SizeToCSS( opt.height );
 	that.appendWidget(element, opt);
 	element.setValue = function (result?: InspectorValue, skipEvent?: boolean)
 	{
 		if (result === undefined || typeof result !== 'string' || result == textarea.value) { return; }
 		value = result;
 		textarea.value = result;
-		if (!skipEvent) { LiteGUI.trigger(textarea, "change"); }
+		if (!skipEvent) { Trigger(textarea, "change"); }
 	};
 	element.getValue = function ()
 	{
 		return textarea.value;
 	};
-	element.focus = function () { LiteGUI.focus(textarea); };
+	element.focus = function () { FocusElement(textarea); };
 	element.disable = function () { textarea.disabled = true; };
 	element.enable = function () { textarea.disabled = false; };
 	that.processElement(element, opt);

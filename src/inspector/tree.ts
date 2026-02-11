@@ -1,6 +1,5 @@
-import type { Tree, TreeData, TreeNode, TreeOptions } from "../widgets/tree";
+import { Tree, TreeData, TreeNode, TreeOptions } from "../widgets/tree";
 import { CreateWidgetOptions, InspectorValue, InspectorWidget } from "../@types/Inspector";
-import { LiteGUI } from "../core";
 import { Inspector } from "./inspector";
 
 /**
@@ -51,7 +50,7 @@ export function AddTree(that: Inspector, name: string, value: TreeData, options:
 		treeRoot.style.overflow = "auto";
 	}
 
-	const tree = element.tree = new LiteGUI.Tree(value, options.treeOptions);
+	const tree = element.tree = new Tree(value, options.treeOptions);
 	tree.onItemSelected = function (data: TreeData, node: TreeNode)
 	{
 		if (options.callback) { options.callback.call(element, node, data); }

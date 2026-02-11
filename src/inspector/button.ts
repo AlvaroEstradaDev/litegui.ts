@@ -1,3 +1,4 @@
+import { Trigger } from "../utilities";
 import { CreateWidgetOptions, InspectorValue, InspectorWidget, WidgetChangeOptions } from "../@types/Inspector";
 import { LiteGUI } from "../core";
 import { Inspector } from "./inspector";
@@ -86,7 +87,7 @@ export function AddButton(that: Inspector, name?: string, value?: string, option
 	button.addEventListener("click", (event: MouseEvent) =>
 	{
 		that.onWidgetChange(element, name, button.innerHTML, processedOptions as unknown as WidgetChangeOptions, false, event);
-		LiteGUI.trigger(button, "wclick", value);
+		Trigger(button, "wclick", value);
 	});
 	that.appendWidget(element, processedOptions);
 

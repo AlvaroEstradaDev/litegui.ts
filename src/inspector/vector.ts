@@ -1,7 +1,7 @@
-import { LiteGUI } from "../core";
 import { Inspector } from "./inspector";
 import { CreateWidgetOptions, InspectorActiveWidget, InspectorValue, WidgetChangeOptions } from "../@types/Inspector";
 import { Dragger, DraggerOptions } from "../dragger";
+import { Trigger } from "../utilities";
 
 /**
  * Options for creating a Vector widget.
@@ -86,7 +86,7 @@ export function AddVector(that: Inspector, name: string | undefined,
 
 	for (let i = 0; i < value.length; i++)
 	{
-		const dragger: Dragger = new LiteGUI.Dragger(value[i], options);
+		const dragger: Dragger = new Dragger(value[i], options);
 		dragger.root.style.marginLeft = '0';
 		dragger.root.style.width = "calc( 25% - 1px )";
 		element.querySelector(".wcontent")!.appendChild(dragger.root);
@@ -106,7 +106,7 @@ export function AddVector(that: Inspector, name: string | undefined,
 			r.push(parseFloat(inputs[j].value));
 		}
 
-		LiteGUI.trigger(element, "wbeforechange", [r]);
+		Trigger(element, "wbeforechange", [r]);
 
 		that.values.set(valueName, r);
 
@@ -146,12 +146,12 @@ export function AddVector(that: Inspector, name: string | undefined,
 			}
 		}
 
-		LiteGUI.trigger(element, "wchange", [r]);
+		Trigger(element, "wchange", [r]);
 		if (that.onChange) { that.onChange(valueName, r, element); }
 	};
 	const onStopDragging = function (input: VectorInput)
 	{
-		LiteGUI.trigger(input, "change");
+		Trigger(input, "change");
 	};
 	for (let i = 0; i < inputs.length; ++i)
 	{

@@ -1,6 +1,6 @@
 import { LiteGUIObject } from "./@types/globals";
 import { LiteGUI } from "./core";
-import { Trigger } from "./utilities";
+import { SizeToCSS, Trigger } from "./utilities";
 
 /**
  * Configuration options for the Area component.
@@ -240,11 +240,11 @@ export class Area implements LiteGUIObject
 				}
 				else
 				{
-					LiteGUI.trigger(element, "resize");
+					Trigger(element, "resize");
 				}
 			}
 		}
-		LiteGUI.sizeToCSS();
+		SizeToCSS();
 		// Inner callback
 		if (this.options.onResize) { this.options.onResize(); }
 	}

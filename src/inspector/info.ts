@@ -1,5 +1,5 @@
+import { SizeToCSS } from "../utilities";
 import { CreateWidgetOptions, InspectorActiveWidget, InspectorValue, WidgetChangeOptions } from "../@types/Inspector";
-import { LiteGUI } from "../core";
 import { Inspector } from "./inspector";
 
 
@@ -92,7 +92,7 @@ export function AddInfo(that: Inspector, name?: string, value?: string, options?
 	// Apply custom width if specified
 	if (options.width)
 	{
-		element.style.width = LiteGUI.sizeToCSS(options.width) ?? '0';
+		element.style.width = SizeToCSS(options.width) ?? '0';
 		element.style.display = "inline-block";
 		if (!name) { info.style.margin = "2px"; }
 	}
@@ -100,7 +100,7 @@ export function AddInfo(that: Inspector, name?: string, value?: string, options?
 	// Apply custom height if specified
 	if (options.height)
 	{
-		content.style.height = LiteGUI.sizeToCSS(options.height) ?? '0';
+		content.style.height = SizeToCSS(options.height) ?? '0';
 		content.style.overflow = "auto";
 	}
 

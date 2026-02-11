@@ -2,6 +2,7 @@ import { LiteGUI } from "../core";
 import { Inspector } from "./inspector";
 import { LineEditor, LineEditorElement, LineEditorOptions } from "../widgets";
 import { InspectorWidget, WidgetChangeOptions } from "../@types/Inspector";
+import { Trigger } from "../utilities";
 
 /**
  * Adds a line editor widget to the inspector with the specified name, value, and options.
@@ -27,9 +28,9 @@ export function AddLineEditor(that: Inspector, name: string, value: number[][], 
 	LiteGUI.bind(lineEditor, "change", (e: Event) =>
 	{
 		const target = e.target as LineEditorElement;
-		LiteGUI.trigger(element, "wbeforechange", target.valuesArray);
+		Trigger(element, "wbeforechange", target.valuesArray);
 		if (options.callback) { options.callback.call(element, target.valuesArray, e); }
-		LiteGUI.trigger(element, "wchange", target.valuesArray);
+		Trigger(element, "wchange", target.valuesArray);
 		that.onWidgetChange(element, name, target.valuesArray, options as unknown as WidgetChangeOptions);
 	});
 

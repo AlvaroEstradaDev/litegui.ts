@@ -1,5 +1,6 @@
+import { CreateElement, CreateListItem, RemoveClass, SizeToCSS } from "../utilities";
 import { LiteGUIObject } from "../@types/globals";
-import { LiteGUI, SpecialCode } from "../core";
+import { SpecialCode } from "../core";
 
 /**
  * Options for the ComplexList widget.
@@ -74,7 +75,7 @@ export class ComplexList implements LiteGUIObject
 
 		if (this.options.height)
 		{
-			this.root.style.height = LiteGUI.sizeToCSS(this.options.height) ?? '';
+			this.root.style.height = SizeToCSS(this.options.height) ?? '';
 		}
 
 		this.onItemSelected = options.onItemSelected;
@@ -89,7 +90,7 @@ export class ComplexList implements LiteGUIObject
 	 */
 	addTitle(text: string)
 	{
-		const elem = LiteGUI.createElement("div", ".listtitle", text);
+		const elem = CreateElement("div", ".listtitle", text);
 		this.root.appendChild(elem);
 		return elem;
 	}
@@ -102,7 +103,7 @@ export class ComplexList implements LiteGUIObject
 	 */
 	addHTML(html: string, onClick?: () => void)
 	{
-		const elem = LiteGUI.createElement("div", ".listtext", html);
+		const elem = CreateElement("div", ".listtext", html);
 		if (onClick) { elem.addEventListener("mousedown", onClick); }
 		this.root.appendChild(elem);
 		return elem;
@@ -127,7 +128,7 @@ export class ComplexList implements LiteGUIObject
 	addItem(item: ComplexListDivElement | number, text: string, isEnabled: boolean, canBeRemoved: boolean)
 	{
 		const title = text ?? ((typeof item === 'object') ? (item.content || item.name) ?? "" : "");
-		const elem = LiteGUI.createListItem(this.itemCode, { ".title": title }) as ComplexListSpanElement;
+		const elem = CreateListItem(this.itemCode, { ".title": title }) as ComplexListSpanElement;
 		elem.item = item;
 
 		if (isEnabled) { elem.classList.add("enabled"); }
@@ -201,7 +202,7 @@ export class ComplexList implements LiteGUIObject
 
 		elem.setSelected = (selected: boolean) =>
 		{
-			LiteGUI.removeClass(this.root, "selected");
+			RemoveClass(this.root, "selected");
 			if (selected)
 			{
 				elem.classList.add("selected");

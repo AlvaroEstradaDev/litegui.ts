@@ -1,5 +1,5 @@
+import { IsCursorOverElement, Trigger } from "../utilities";
 import { LiteGUIObject } from "../@types/globals";
-import { LiteGUI } from "../core";
 
 /**
  * Data structure representing a menu item in the ContextMenu.
@@ -267,9 +267,9 @@ export class ContextMenu implements LiteGUIObject
 			{
 				this.parentMenu.close(e);
 			}
-			else if (e && !LiteGUI.isCursorOverElement(e, this.parentMenu.root))
+			else if (e && !IsCursorOverElement(e, this.parentMenu.root))
 			{
-				LiteGUI.trigger(this.parentMenu.root, "mouseleave", e);
+				Trigger(this.parentMenu.root, "mouseleave", e);
 			}
 		}
 
@@ -381,7 +381,7 @@ export class ContextMenu implements LiteGUIObject
 					{
 						throw ("ContextMenu submenu needs options");
 					}
-					new LiteGUI.ContextMenu([value.submenu.options], {
+					new ContextMenu([value.submenu.options], {
 						callback: value.submenu.options.callback,
 						ignoreItemCallbacks: value.submenu.options.ignoreItemCallbacks,
 						title: value.submenu.options.title,

@@ -1,7 +1,7 @@
-import { LiteGUI } from "../core";
 import { Inspector } from "./inspector";
 import { CreateWidgetOptions, InspectorActiveWidget, InspectorValue, WidgetChangeOptions } from "../@types/Inspector";
 import { DraggerOptions } from "../dragger";
+import { Trigger } from "../utilities";
 
 /**
  * Options for creating a Pad widget.
@@ -134,7 +134,7 @@ export function AddPad(that: Inspector, name: string,
 
 		const r = [x, y] as [number, number];
 
-		LiteGUI.trigger(element, "wbeforechange", [r]);
+		Trigger(element, "wbeforechange", [r]);
 		element.setValue(r);
 
 		if (options && (options as AddPadOptions).callback)
@@ -146,7 +146,7 @@ export function AddPad(that: Inspector, name: string,
 			}
 		}
 
-		LiteGUI.trigger(element, "wchange", [r]);
+		Trigger(element, "wchange", [r]);
 		if (that.onChange) { that.onChange(valueName, r, element); }
 	}
 

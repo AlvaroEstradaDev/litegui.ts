@@ -260,7 +260,7 @@ export class Core
 	 */
 	createMenubar(): void
 	{
-		this.menubar = new LiteGUI.Menubar("mainmenubar");
+		this.menubar = new Menubar("mainmenubar");
 		this.add(this.menubar);
 	}
 

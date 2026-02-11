@@ -1,6 +1,7 @@
 import { LiteGUIObject } from "./@types/globals";
-import { CoreDocument } from "./utilities";
+import { CoreDocument, Draggable, GetRect, Trigger } from "./utilities";
 import { LiteGUI, SpecialCode } from "./core";
+import { Panel } from "./panel";
 
 /**
  * Options for a button in the dialog.
@@ -424,7 +425,7 @@ export class Dialog implements LiteGUIObject
 			const element = panel.querySelector(".panel-header") as HTMLElement | null;
 			if (element)
 			{
-				LiteGUI.draggable(panel, element, () =>
+				Draggable(panel, element, () =>
 				{
 					this.bringToFront();
 				}, () => { }, () =>
@@ -474,7 +475,7 @@ export class Dialog implements LiteGUIObject
 			}
 			else if (e.type == "mousemove")
 			{
-				const rect = LiteGUI.getRect(root);
+				const rect = GetRect(root);
 				const w = rect.width;
 				const newW = w - (mouse[0] - e.pageX);
 
@@ -532,7 +533,7 @@ export class Dialog implements LiteGUIObject
 			panel.style.width = "100%";
 			panel.style.height = "100%";
 			this.content.style.width = "100%";
-			this.content.style.height = "calc(100% - " + (titleHeight ?? LiteGUI.Panel.TITLE_HEIGHT) + ")"; // Title offset: 20px
+			this.content.style.height = "calc(100% - " + (titleHeight ?? Panel.TITLE_HEIGHT) + ")"; // Title offset: 20px
 			this.content.style.overflow = "auto";
 		}
 		else if (dockType == 'left' || dockType == 'right')
@@ -543,7 +544,7 @@ export class Dialog implements LiteGUIObject
 
 			panel.style.width = this.width + "px";
 			panel.style.height = "100%";
-			this.content.style.height = "calc(100% - " + (titleHeight ?? LiteGUI.Panel.TITLE_HEIGHT) + ")";
+			this.content.style.height = "calc(100% - " + (titleHeight ?? Panel.TITLE_HEIGHT) + ")";
 			this.content.style.overflow = "auto";
 
 			if (dockType == 'right')
@@ -565,7 +566,7 @@ export class Dialog implements LiteGUIObject
 
 		if (this.draggable)
 		{
-			LiteGUI.draggable(panel);
+			Draggable(panel);
 		}
 
 		if (typeof (parent) == "string")
@@ -644,7 +645,7 @@ export class Dialog implements LiteGUIObject
 	close()
 	{
 		LiteGUI.remove(this.root);
-		LiteGUI.trigger(this.root, "closed", this);
+		Trigger(this.root, "closed", this);
 		if (this.onClose) { this.onClose(); }
 		if (this._dialogWindow)
 		{
@@ -688,7 +689,7 @@ export class Dialog implements LiteGUIObject
 		const maximizeButton = this.root.querySelector(".maximize-button") as HTMLElement;
 		if (maximizeButton) { maximizeButton.style.display = ""; }
 
-		this.root.style.width = LiteGUI.Dialog.MINIMIZED_WIDTH + "px";
+		this.root.style.width = Dialog.MINIMIZED_WIDTH + "px";
 
 		const closeCallback = (_e: Event): void =>
 		{
@@ -702,7 +703,7 @@ export class Dialog implements LiteGUIObject
 		this.arrangeMinimized();
 
 
-		LiteGUI.trigger(this.root, "minimizing");
+		Trigger(this.root, "minimizing");
 	}
 
 	/**
@@ -715,7 +716,7 @@ export class Dialog implements LiteGUIObject
 			const dialog = this._minimized[i];
 			const parent = dialog.root.parentNode as Element;
 			const pos = (parent?.getBoundingClientRect().height ?? 20) - 20;
-			dialog.root.style.left = (LiteGUI.Dialog.MINIMIZED_WIDTH * parseInt(i)).toString();
+			dialog.root.style.left = (Dialog.MINIMIZED_WIDTH * parseInt(i)).toString();
 			dialog.root.style.top = pos + "px";
 		}
 	}
@@ -729,7 +730,7 @@ export class Dialog implements LiteGUIObject
 		this._minimized = [];
 
 		this.content.style.display = "";
-		LiteGUI.draggable(this.root);
+		Draggable(this.root);
 		if (this._oldBox)
 		{
 			this.root.style.left = this._oldBox.left + "px";
@@ -746,7 +747,7 @@ export class Dialog implements LiteGUIObject
 
 		this._minimized.splice(this._minimized.indexOf(this), 1);
 		this.arrangeMinimized();
-		LiteGUI.trigger(this.root, "maximizing");
+		Trigger(this.root, "maximizing");
 	}
 
 	/**
@@ -806,7 +807,7 @@ export class Dialog implements LiteGUIObject
 		if (!this._isWindowDetached)
 		{
 			this.root.style.display = "";
-			LiteGUI.trigger(this.root, "shown");
+			Trigger(this.root, "shown");
 		}
 	}
 
@@ -816,7 +817,7 @@ export class Dialog implements LiteGUIObject
 	hide()
 	{
 		this.root.style.display = "none";
-		LiteGUI.trigger(this.root, "hidden");
+		Trigger(this.root, "hidden");
 	}
 
 	/**
@@ -844,7 +845,7 @@ export class Dialog implements LiteGUIObject
 	{
 		if (!this.root.parentNode)
 		{
-			console.warn("LiteGUI.Dialog: Cannot set position of dialog if it is not in the DOM");
+			console.warn("Dialog: Cannot set position of dialog if it is not in the DOM");
 		}
 
 		this.root.style.position = "absolute";

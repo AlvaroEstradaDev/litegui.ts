@@ -1,6 +1,6 @@
-import { LiteGUI } from "../core";
 import { Inspector } from "./inspector";
 import { CreateWidgetOptions, InspectorValue, InspectorWidget, WidgetChangeOptions } from "../@types/Inspector";
+import { Trigger } from "../utilities";
 
 /**
  * Options for configuring the Icon widget.
@@ -103,7 +103,7 @@ export function AddIcon(that: Inspector, name?: string,
 		e.preventDefault();
 		value = !value;
 		const ret = that.onWidgetChange(element, name!, value, processedOptions as unknown as WidgetChangeOptions);
-		LiteGUI.trigger(element, "wclick", value);
+		Trigger(element, "wclick", value);
 
 		if (ret !== undefined) { value = ret; }
 

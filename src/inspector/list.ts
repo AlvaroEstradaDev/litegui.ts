@@ -1,3 +1,4 @@
+import { SafeName, Trigger } from "../utilities";
 import { CreateWidgetOptions, InspectorActiveWidget, InspectorValue, WidgetChangeOptions } from "../@types/Inspector";
 import { LiteGUI } from "../core";
 import { Inspector } from "./inspector";
@@ -197,13 +198,13 @@ export function AddList(that: Inspector, name?: string, values?: string[], optio
 		else if (e.code == 'ArrowDown') // Arrow down
 		{
 			const next = selected.nextSibling;
-			if (next) { LiteGUI.trigger(next, "click"); }
+			if (next) { Trigger(next, "click"); }
 			selected.scrollIntoView({ block: "end", behavior: "smooth" });
 		}
 		else if (e.code == 'ArrowUp') // Arrow up
 		{
 			const prev = selected.previousSibling;
-			if (prev) { LiteGUI.trigger(prev, "click"); }
+			if (prev) { Trigger(prev, "click"); }
 			selected.scrollIntoView({ block: "end", behavior: "smooth" });
 		}
 		else
@@ -237,7 +238,7 @@ export function AddList(that: Inspector, name?: string, values?: string[], optio
 		pos = typeof pos == "string" ? parseFloat(pos) : 0;
 		const value = values![pos];
 		that.onWidgetChange(element, valueName, value, options);
-		LiteGUI.trigger(element, "wadded", value);
+		Trigger(element, "wadded", value);
 	};
 	const _onItemDblClick = function (e: MouseEvent)
 	{
@@ -314,7 +315,7 @@ export function AddList(that: Inspector, name?: string, values?: string[], optio
 		itemName = itemName.replace(/<(?:.|\n)*?>/gm, ''); // Remove html tags that could break the html
 
 		const liItem = document.createElement("li");
-		liItem.classList.add(`item-${LiteGUI.safeName(itemIndex ?? "")}`);
+		liItem.classList.add(`item-${SafeName(itemIndex ?? "")}`);
 		if (selected) { liItem.classList.add('selected'); }
 		liItem.dataset["name"] = itemName;
 		liItem.dataset["pos"] = itemIndex;
@@ -410,7 +411,7 @@ export function AddList(that: Inspector, name?: string, values?: string[], optio
 		{
 			const item = items[i];
 			if (item.classList.contains("selected")) { continue; }
-			LiteGUI.trigger(item, "click");
+			Trigger(item, "click");
 		}
 	};
 
@@ -421,7 +422,7 @@ export function AddList(that: Inspector, name?: string, values?: string[], optio
 		{
 			const item = items[i];
 			if (!item.classList.contains("selected")) { continue; }
-			LiteGUI.trigger(item, "click");
+			Trigger(item, "click");
 		}
 	};
 

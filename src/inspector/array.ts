@@ -1,6 +1,16 @@
-import { AddContainerOptions, CreateWidgetOptions, InspectorWidgetTypes, WidgetChangeOptions, InspectorContainer, GenericCreationOptions, PropertyOptions, InspectorWidget, InspectorValue } from "src/@types/Inspector";
+import {
+	AddContainerOptions,
+	CreateWidgetOptions,
+	InspectorWidgetTypes,
+	WidgetChangeOptions,
+	InspectorContainer,
+	GenericCreationOptions,
+	PropertyOptions,
+	InspectorWidget,
+	InspectorValue
+} from "../@types/Inspector";
 import { Inspector } from "./inspector";
-import { LiteGUI } from "../core";
+import { SizeToCSS } from "../utilities";
 
 /**
  * Type representing the values that can be edited in the array inspector.
@@ -129,7 +139,7 @@ export function AddArray(that: Inspector, name: string, value: InspectorArrayEdi
 	title.title = name;
 	if (options.nameWidth)
 	{
-		title.style.width = LiteGUI.sizeToCSS(options.nameWidth) as string;
+		title.style.width = SizeToCSS(options.nameWidth) as string;
 	}
 	header.appendChild(title);
 

@@ -1,6 +1,5 @@
-import { RGBAToHEXA } from "../utilities";
+import { RGBAToHEXA, Trigger } from "../utilities";
 import { CreateWidgetOptions, InspectorValue, InspectorWidget } from "../@types/Inspector";
-import { LiteGUI } from "../core";
 import { Inspector } from "./inspector";
 import Pickr from "@simonwep/pickr";
 
@@ -119,7 +118,7 @@ export function AddColor(that: Inspector, name: string,
 		// Trigger callbacks and events
 		const event_data = [rgba.concat(), hex];
 
-		LiteGUI.trigger(element, "wbeforechange", event_data);
+		Trigger(element, "wbeforechange", event_data);
 
 		if (processedOptions.callback)
 		{
@@ -130,7 +129,7 @@ export function AddColor(that: Inspector, name: string,
 			processedOptions.onChange.call(element, rgba.concat(), hex);
 		}
 
-		LiteGUI.trigger(element, "wchange", event_data);
+		Trigger(element, "wchange", event_data);
 		if (that.onChange) { that.onChange(name, rgba.concat(), element); }
 	};
 
