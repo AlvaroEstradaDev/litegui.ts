@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.6] - 2026-02-11
+
+### 🐛 Bug Fixes
+
+- *(Core)* Added LiteGUI getter
+
 ## [1.0.5] - 2026-02-11
 
 ### 🐛 Bug Fixes
