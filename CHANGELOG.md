@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.4] - 2026-02-11
+
+### 🏗️ Miscellaneous
+
+- *(Webpack)* Changed to umd
+- Changed the build type from var to umd
+
 ## [1.0.3] - 2026-02-11
 
 ### 📚 Documentation
