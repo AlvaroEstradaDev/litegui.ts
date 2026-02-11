@@ -23,9 +23,10 @@ export const webpackCommon =
 		publicPath: "./",
 		library: {
 			name: 'LiteGUI',
-			type: 'var',
+			type: 'umd',
 			export: 'LiteGUI',
 		},
+		globalObject: 'this',
 		filename: "[name].js"
 	},
 	plugins: [

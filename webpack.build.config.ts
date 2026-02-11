@@ -81,9 +81,10 @@ const unminifiedConfig = {
 		publicPath: "./",
 		library: {
 			name: 'LiteGUI',
-			type: 'var',
+			type: 'umd',
 			export: 'LiteGUI',
 		},
+		globalObject: 'this',
 		filename: "[name].js"
 	},
 	optimization: {
@@ -133,9 +134,10 @@ const minifiedConfig = {
 		publicPath: "./",
 		library: {
 			name: 'LiteGUI',
-			type: 'var',
+			type: 'umd',
 			export: 'LiteGUI',
 		},
+		globalObject: 'this',
 		filename: "[name].mini.js"
 	},
 	optimization: {
