@@ -97,6 +97,15 @@ export class Core
 	/** Registry of open windows (popped out) */
 	windows: Window[] = [];
 
+	/**
+	 * Returns the instance itself. This is useful for when the instance is exported as the module
+	 * and we want to allow named imports (e.g. import { LiteGUI } from "litegui.ts").
+	 */
+	get LiteGUI(): Core
+	{
+		return this;
+	}
+
 	Area: typeof Area = Area;
 	Split: typeof Split = Split;
 	Menubar: typeof Menubar = Menubar;
