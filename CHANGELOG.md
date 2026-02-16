@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.0.9] - 2026-02-16
+
+### 📚 Documentation
+
+- *(Examples)* Updated simple.html
+
 ## [1.0.7] - 2026-02-11
 
 ### 🏗️ Miscellaneous
