@@ -43,13 +43,24 @@ body { background-color: #DDD; }
 	<script type="text/javascript">
 		//call the init to setup
 		LiteGUI.init();
-		var sidebar = new LiteGUI.Inspector();
-		sidebar.addString("Name", "now");
-		sidebar.addButton(null, "Send", function ()
+
+		// Create a dialog
+		var dialog = new LiteGUI.Dialog({ title: "Settings", width: 300, height: 200, close: true, minimize: true, resizable: true, draggable: true });
+		
+		// Create the inspector
+		var widgets = new LiteGUI.Inspector();
+		widgets.addString("Name", "now");
+		widgets.addButton(null, "Send", function ()
 		{
 			LiteGUI.alert("foo");
 		});
-		sidebar.appendTo("#sidebar");
+
+		// Add inspector to dialog
+		dialog.add(widgets);
+		
+		// Show the dialog
+		dialog.show();
+		dialog.center();
 	</script>
 </body>
 
